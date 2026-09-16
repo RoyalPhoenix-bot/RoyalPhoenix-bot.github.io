@@ -1,0 +1,132 @@
+.blog-main,
+.post-main {
+  position: relative;
+  z-index: 1;
+  min-height: 80vh;
+  max-width: 760px;
+  margin: 0 auto;
+  padding: 6vh 6vw 12vh;
+  display: block;
+}
+
+.page-title {
+  font-family: "Italiana", serif;
+  font-weight: 400;
+  font-size: clamp(2.2rem, 5vw, 3rem);
+  margin: 0 0 0.75rem;
+}
+
+.page-lede {
+  color: var(--muted);
+  font-size: 1.02rem;
+  margin: 0 0 4rem;
+}
+
+/* --- blog listing --- */
+.post-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+.post-item {
+  padding: 2rem 0;
+  border-top: 1px solid var(--line);
+}
+
+.post-item:last-child {
+  border-bottom: 1px solid var(--line);
+}
+
+.post-date {
+  display: block;
+  color: var(--muted);
+  font-size: 0.85rem;
+  letter-spacing: 0.02em;
+  margin-bottom: 0.5rem;
+}
+
+.post-title {
+  display: inline-block;
+  font-family: "Italiana", serif;
+  font-size: 1.5rem;
+  color: var(--text);
+  text-decoration: none;
+  border-bottom: 1px solid transparent;
+  margin-bottom: 0.5rem;
+}
+
+.post-title:hover,
+.post-title:focus-visible {
+  border-color: var(--accent);
+}
+
+.post-summary {
+  margin: 0;
+  color: var(--muted);
+  line-height: 1.7;
+  max-width: 60ch;
+}
+
+.post-list-empty {
+  color: var(--muted);
+}
+
+/* --- individual article --- */
+.post-main .back-link {
+  display: inline-block;
+  color: var(--muted);
+  text-decoration: none;
+  font-size: 0.9rem;
+  margin-bottom: 3rem;
+  border-bottom: 1px solid transparent;
+}
+
+.post-main .back-link:hover,
+.post-main .back-link:focus-visible {
+  color: var(--text);
+  border-color: var(--accent);
+}
+
+.post-main time {
+  display: block;
+  color: var(--muted);
+  font-size: 0.85rem;
+  margin-bottom: 1rem;
+}
+
+.post-main h1 {
+  font-family: "Italiana", serif;
+  font-weight: 400;
+  font-size: clamp(2.2rem, 5vw, 3rem);
+  line-height: 1.1;
+  margin: 0 0 2.5rem;
+}
+
+.post-main h2 {
+  font-family: "Italiana", serif;
+  font-weight: 400;
+  font-size: 1.5rem;
+  margin: 2.5rem 0 1rem;
+}
+
+.post-main p {
+  color: var(--muted);
+  line-height: 1.8;
+  font-size: 1.03rem;
+  margin: 0 0 1.5rem;
+}
+
+.post-main strong {
+  color: var(--text);
+  font-weight: 500;
+}
+
+@media (max-width: 820px) {
+  .blog-main,
+  .post-main {
+    padding: 4vh 8vw 8vh;
+  }
+}

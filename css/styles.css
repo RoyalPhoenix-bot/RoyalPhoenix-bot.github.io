@@ -51,6 +51,39 @@ body {
   will-change: transform;
 }
 
+/* top tab bar — shared across every page */
+.topnav {
+  position: sticky;
+  top: 0;
+  z-index: 3;
+  display: flex;
+  gap: 2rem;
+  align-items: center;
+  max-width: 1180px;
+  margin: 0 auto;
+  padding: 3rem 6vw 0;
+}
+
+.topnav-link {
+  color: var(--muted);
+  text-decoration: none;
+  font-size: 0.95rem;
+  letter-spacing: 0.02em;
+  padding-bottom: 0.4rem;
+  border-bottom: 1px solid transparent;
+  transition: color 0.25s ease, border-color 0.25s ease;
+}
+
+.topnav-link:hover,
+.topnav-link:focus-visible {
+  color: var(--text);
+}
+
+.topnav-link.active {
+  color: var(--text);
+  border-color: var(--accent);
+}
+
 main {
   position: relative;
   z-index: 1;
@@ -61,7 +94,7 @@ main {
   align-items: center;
   max-width: 1180px;
   margin: 0 auto;
-  padding: 12vh 6vw;
+  padding: 8vh 6vw 12vh;
 }
 
 .intro {

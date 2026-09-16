@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta name="description" content="Why I Rebuilt My Profiler in Rust — Kushagra Sharma." />
+<title>Why I Rebuilt My Profiler in Rust — Kushagra</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link
+  href="https://fonts.googleapis.com/css2?family=Italiana&family=Outfit:wght@300;400;500&display=swap"
+  rel="stylesheet"
+/>
+<link rel="stylesheet" href="../css/styles.css" />
+<link rel="stylesheet" href="../css/blog.css" />
+</head>
+<body>
+<div class="grain" aria-hidden="true"></div>
+<div class="orb" aria-hidden="true"></div>
+
+<header class="topnav">
+  <a href="../index.html" class="topnav-link">Home</a>
+  <a href="../blog.html" class="topnav-link active">Blog</a>
+</header>
+
+<main class="post-main">
+  <a href="../blog.html" class="back-link">&larr; Back to all posts</a>
+
+  <time datetime="2026-09-01">September 1, 2026</time>
+  <h1>Why I Rebuilt My Profiler in Rust</h1>
+
+  <p>
+    Every performance tool starts the same way: something is slow, nobody
+    knows why, and the existing dashboards raise more questions than they
+    answer. That was the state of our continuous-profiling setup a few
+    months ago — accurate most of the time, but slow enough under load that
+    people quietly stopped trusting it during incidents, which is exactly
+    when you need it most.
+  </p>
+
+  <h2>The bottleneck was the tool itself</h2>
+  <p>
+    The original sampler was written for convenience, not throughput. It
+    worked fine at low QPS, but the moment we pointed it at a genuinely busy
+    service, its own overhead started showing up in the traces it was
+    supposed to be measuring. Debugging a hot path with a profiler that adds
+    its own heat is a bad time.
+  </p>
+
+  <p>
+    So I rewrote the sampling core in Rust, kept the existing collector
+    protocol so nothing downstream had to change, and benchmarked it against
+    the old JVM-based version across the same synthetic workloads. The
+    numbers were the fun part: run-to-run variance dropped from roughly 25%
+    to under 2%, and we caught a genuine 3x latency regression in staging
+    that the old tooling would have buried in noise.
+  </p>
+
+  <h2>What actually mattered</h2>
+  <p>
+    Rewriting for speed is the easy pitch. The harder, more valuable part
+    was making the tool boring and predictable enough that people would
+    trust its output during an actual incident, at 2 a.m., without
+    double-checking it against three other dashboards first.
+  </p>
+
+  <p>
+    <strong>Takeaway:</strong> a profiler that lies quietly is worse than no
+    profiler at all — measure the overhead of your own tooling as
+    rigorously as you measure the thing it's pointed at.
+  </p>
+</main>
+
+<nav aria-label="Links">
+  <a href="https://github.com/RoyalPhoenix-bot" rel="noopener noreferrer">GitHub</a>
+  <a href="https://www.linkedin.com/in/kushagra-sharma-363865210/" rel="noopener noreferrer">LinkedIn</a>
+  <a href="https://x.com/iambigbread" rel="noopener noreferrer">X</a>
+  <a href="mailto:kushagrasharma.sharma@gmail.com">Email</a>
+</nav>
+
+<script src="../js/script.js"></script>
+</body>
+</html>
