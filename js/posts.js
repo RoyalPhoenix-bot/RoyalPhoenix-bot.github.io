@@ -17,6 +17,13 @@ const posts = [
     date: "2024-06-22",
     file: "/blogs/ive-left",
   },
+  {
+    title: "The Uncertainitinometer",
+    summary:
+      "My attempt at rewriting Agatha Christie's Wasps' Nest into a sci-fi theme. This was written in 3 hours as part of an end-sem exam, so do gimme the benefit of doubt.",
+    date: "2023-04-30",
+    file: "/blogs/the-uncertainitinometer",
+  },
   // {
   //   title: "Why I Rebuilt My Profiler in Rust",
   //   summary:
