@@ -24,6 +24,13 @@ const posts = [
     date: "2023-04-30",
     file: "/blogs/the-uncertainitinometer",
   },
+  {
+    title: "The Queen's Gambit",
+    summary:
+      "Opening theory for beginners - The Queen's Gambit. This is the only opening with White that I know since I was heaving inspired by the serires.",
+    date: "2021-06-06",
+    file: "/blogs/queens-gambit",
+  },
   // {
   //   title: "Why I Rebuilt My Profiler in Rust",
   //   summary:

@@ -158,6 +158,7 @@ main {
   margin-bottom: 0;
 }
 
+/* Footer links */
 nav[aria-label="Links"] {
   position: relative;
   z-index: 1;
