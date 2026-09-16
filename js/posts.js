@@ -11,10 +11,17 @@
 
 const posts = [
   {
-    title: "Why I Rebuilt My Profiler in Rust",
+    title: "It's Me, I've Left",
     summary:
-      "A short account of chasing a 3x latency regression down to the metal, and what it taught me about tooling.",
-    date: "2026-09-01",
-    file: "/blogs/sample-post",
+      "There is an art, or rather, a knack to flying. The knack lies in learning how to throw yourself at the ground and miss. You’ll have so many opportunities to throw yourself at the ground, all you have to do is to learn how to miss it.",
+    date: "2024-06-22",
+    file: "/blogs/ive-left",
   },
+  // {
+  //   title: "Why I Rebuilt My Profiler in Rust",
+  //   summary:
+  //     "A short account of chasing a 3x latency regression down to the metal, and what it taught me about tooling.",
+  //   date: "2026-09-01",
+  //   file: "/blogs/sample-post",
+  // },
 ];
