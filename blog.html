@@ -1,3 +1,14 @@
+<!--
+  blog.html — Blog index.
+
+  Lists every post as a title + one-line summary. The list itself is
+  rendered by js/blog.js from the manifest in js/posts.js — this file has
+  no hardcoded posts. To publish a new post, edit js/posts.js, not this
+  file. See README.md and blogs/README.md for the full workflow.
+
+  Styles:  css/styles.css, css/blog.css
+  Scripts: js/script.js (orb), js/posts.js (data), js/blog.js (renders list)
+-->
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -19,8 +30,8 @@
 <div class="orb" aria-hidden="true"></div>
 
 <header class="topnav">
-  <a href="index.html" class="topnav-link">Home</a>
-  <a href="blog.html" class="topnav-link active">Blog</a>
+  <a href="/index" class="topnav-link">Home</a>
+  <a href="/blog" class="topnav-link active">Blog</a>
 </header>
 
 <main class="blog-main">

@@ -1,3 +1,8 @@
+// js/script.js — Shared across every page.
+// Moves the ambient .orb glow slightly as the pointer moves, purely
+// decorative. Does nothing (and adds no listener) if the visitor has
+// "prefers-reduced-motion" enabled.
+
 const orb = document.querySelector(".orb");
 const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 

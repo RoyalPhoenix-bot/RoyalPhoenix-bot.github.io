@@ -1,3 +1,8 @@
+// js/blog.js — Used only by blog.html.
+// Reads the `posts` array defined in js/posts.js (loaded before this file)
+// and renders it into the <ul id="post-list"> on the page. Edit js/posts.js
+// to add/remove posts — this file shouldn't need to change.
+
 function formatDate(iso) {
   const d = new Date(`${iso}T00:00:00`);
   return d.toLocaleDateString("en-US", {

@@ -1,3 +1,15 @@
+/*
+  css/styles.css — Shared base styles, loaded on every page.
+
+  Contains: design tokens (:root), the fixed grain + orb background effects,
+  the top tab bar (.topnav, used by index/blog/every post), the home page's
+  two-column hero (main, .intro, .about, .portrait), and the footer social
+  links (nav[aria-label="Links"]).
+
+  Page-specific rules (blog list, article typography) live in css/blog.css,
+  loaded after this file on blog.html and blogs/*.html.
+*/
+
 :root {
   --bg: #0b0b0d;
   --text: #f3f1ec;
