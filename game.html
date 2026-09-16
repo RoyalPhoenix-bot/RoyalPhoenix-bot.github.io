@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta name="description" content="Quick Dopamine Hit — Tic Tac Toe with Marvin." />
+<title>Quick Dopamine Hit — Kushagra</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link
+  href="https://fonts.googleapis.com/css2?family=Italiana&family=Outfit:wght@300;400;500&display=swap"
+  rel="stylesheet"
+/>
+<link rel="stylesheet" href="css/styles.css" />
+<link rel="stylesheet" href="css/blog.css" />
+</head>
+<body>
+<div class="grain" aria-hidden="true"></div>
+<div class="orb" aria-hidden="true"></div>
+
+<header class="topnav">
+  <a href="index.html" class="topnav-link">Home</a>
+  <a href="blog.html" class="topnav-link">Blog</a>
+  <a href="game.html" class="topnav-link active">Dopamine Hit</a>
+</header>
+
+<main class="game-page-main">
+  <!-- Left Side: Marvin Persona & Rules -->
+  <div class="marvin-intro">
+    <h1 class="page-title">Quick Dopamine Hit ⚡</h1>
+    <p class="marvin-bio">
+      Meet <strong>Marvin</strong> 🤖: an android equipped with the Genuine People Personalities technology, possessing a brain the size of a planet, and burdened with severe, chronic depression. He has analyzed 10<sup>22</sup> possible futures, solved the grand mysteries of quantum gravity, and yet here he sits—forced to play Tic-Tac-Toe with you.
+    </p>
+    <div class="marvin-bounty">
+      <p>☕ <strong>The Bounty:</strong> If you somehow manage to beat Marvin in 5 attempts or fewer, I will personally buy you a coffee. No catch.</p>
+      <p>⚡ <strong>The Secret:</strong> If you survive 5 attempts of losing or drawing, you will unlock an absolute superpower designed specifically to assist you in "defeating" Marvin.</p>
+    </div>
+  </div>
+
+  <!-- Right Side: Tic Tac Toe Game Container -->
+  <div id="dopamine-hit-section"></div>
+</main>
+
+<nav aria-label="Links">
+  <a href="https://github.com/RoyalPhoenix-bot" rel="noopener noreferrer">GitHub</a>
+  <a href="https://www.linkedin.com/in/kushagra-sharma-363865210/" rel="noopener noreferrer">LinkedIn</a>
+  <a href="https://x.com/iambigbread" rel="noopener noreferrer">X</a>
+  <a href="mailto:kushagrasharma.sharma@gmail.com">Email</a>
+</nav>
+
+<script src="js/script.js"></script>
+<script type="module">
+  import { initGameSection } from "./js/game/controller.js";
+  document.addEventListener("DOMContentLoaded", initGameSection);
+</script>
+</body>
+</html>
