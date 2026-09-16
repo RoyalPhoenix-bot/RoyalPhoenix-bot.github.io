@@ -220,3 +220,15 @@ nav a:focus-visible {
     transition: none;
   }
 }
+
+/* Shared inline paragraph links */
+p a {
+  color: inherit;               /* Uses the parent <p> element's text color */
+  text-decoration: underline;   /* Keeps the underline */
+  text-decoration-color: #888;  /* Subtle, muted underline color */
+  text-underline-offset: 3px;   /* Slight space between text and underline */
+}
+
+p a:hover {
+  text-decoration-color: inherit; /* Darkens underline when hovered */
+}
