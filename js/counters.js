@@ -2,13 +2,20 @@
  * js/counters.js — Handles view and like counts via CounterAPI
  */
 
-const NAMESPACE = "kushu"; // Change this to any unique string for your site
+const NAMESPACE = "kushu"; 
 const BASE_URL = `https://api.counterapi.dev/v1/${NAMESPACE}`;
 
-// Standardized slug helper for both blog index and post pages
 function getPostSlug(fileOrPath) {
   if (!fileOrPath) return "";
   return fileOrPath.split("/").filter(Boolean).pop().replace(/\.html$/, "");
+}
+
+// Extract count safely across CounterAPI response formats
+function parseCount(data) {
+  if (!data || typeof data !== "object") return 0;
+  if (typeof data.count === "number") return data.count;
+  if (typeof data.value === "number") return data.value;
+  return 0;
 }
 
 // Fetch view and like counts without modifying them
@@ -19,12 +26,12 @@ async function getMetrics(slug) {
       fetch(`${BASE_URL}/${slug}_likes`)
     ]);
 
-    const viewsData = viewsRes.ok ? await viewsRes.json() : { count: 0 };
-    const likesData = likesRes.ok ? await likesRes.json() : { count: 0 };
+    const viewsData = viewsRes.ok ? await viewsRes.json() : null;
+    const likesData = likesRes.ok ? await likesRes.json() : null;
 
     return {
-      views: viewsData.count || 0,
-      likes: likesData.count || 0
+      views: parseCount(viewsData),
+      likes: parseCount(likesData)
     };
   } catch (err) {
     console.warn("Failed to fetch CounterAPI metrics:", err);
@@ -36,21 +43,35 @@ async function getMetrics(slug) {
 async function recordView(slug) {
   try {
     const res = await fetch(`${BASE_URL}/${slug}_views/up`);
+    if (!res.ok) return 0;
     const data = await res.json();
-    return data.count;
+    return parseCount(data);
   } catch (err) {
     console.warn("Failed to record view:", err);
+    return 0;
   }
 }
 
 // Toggle Like Count (Up / Down)
 async function recordLike(slug) {
-  const hasLiked = localStorage.getItem(`has_liked_${slug}`) === "true";
-  const action = hasLiked ? "down" : "up";
+  let hasLiked = localStorage.getItem(`has_liked_${slug}`) === "true";
+  let action = hasLiked ? "down" : "up";
 
   try {
-    const res = await fetch(`${BASE_URL}/${slug}_likes/${action}`);
+    let res = await fetch(`${BASE_URL}/${slug}_likes/${action}`);
+
+    // Fallback: If decrementing fails on a uninitialized key, auto-recover by sending /up
+    if (!res.ok && action === "down") {
+      localStorage.removeItem(`has_liked_${slug}`);
+      hasLiked = false;
+      action = "up";
+      res = await fetch(`${BASE_URL}/${slug}_likes/${action}`);
+    }
+
+    if (!res.ok) return null;
+
     const data = await res.json();
+    const newCount = parseCount(data);
 
     if (!hasLiked) {
       localStorage.setItem(`has_liked_${slug}`, "true");
@@ -58,9 +79,10 @@ async function recordLike(slug) {
       localStorage.removeItem(`has_liked_${slug}`);
     }
 
-    return { likes: data.count, liked: !hasLiked };
+    return { likes: newCount, liked: !hasLiked };
   } catch (err) {
     console.warn("Failed to toggle like:", err);
+    return null;
   }
 }
 
