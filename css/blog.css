@@ -313,3 +313,83 @@ body.light-mode .filter-btn.active {
     padding: 1rem 8vw 8vh;
   }
 }
+
+/* --- Post Item Metadata (Views & Likes) --- */
+.post-meta {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+  margin-bottom: 0.5rem;
+  flex-wrap: wrap;
+}
+
+.post-meta-left {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+}
+
+.post-stats {
+  display: flex;
+  align-items: center;
+  gap: 0.85rem;
+  font-size: 0.85rem;
+  color: var(--muted);
+}
+
+.stat-item {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+}
+
+/* --- End-of-Article Like Button --- */
+.post-like-container {
+  text-align: center;
+  margin: 4rem 0 2rem;
+  padding-top: 2rem;
+  border-top: 1px solid var(--line);
+}
+
+.post-like-container p {
+  color: var(--muted);
+  font-size: 0.95rem;
+  margin-bottom: 1rem;
+}
+
+.like-button {
+  background: transparent;
+  border: 1px solid var(--line);
+  color: var(--text);
+  padding: 0.6rem 1.4rem;
+  font-size: 1.1rem;
+  border-radius: 30px;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  transition: all 0.25s ease;
+}
+
+/* --- Transparent Vector Icons --- */
+.stat-icon {
+  width: 16px;
+  height: 16px;
+  display: inline-block;
+  vertical-align: middle;
+  opacity: 0.75;
+  transition: opacity 0.2s ease, transform 0.2s ease;
+}
+
+.stat-item:hover .stat-icon,
+.like-button:hover .stat-icon {
+  opacity: 1;
+}
+
+/* Filled state when user has liked the article */
+.like-button.liked .stat-icon {
+  fill: currentColor;
+  opacity: 1;
+}

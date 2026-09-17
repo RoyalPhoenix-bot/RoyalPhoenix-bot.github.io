@@ -87,8 +87,15 @@ function renderPosts() {
     const item = document.createElement("li");
     item.className = "post-item";
 
+    const slug = getPostSlug(post.file);
+
+    // Meta Container
     const meta = document.createElement("div");
     meta.className = "post-meta";
+
+    // Left Side: Date + Category Badges
+    const metaLeft = document.createElement("div");
+    metaLeft.className = "post-meta-left";
 
     const time = document.createElement("time");
     time.className = "post-date";
@@ -109,7 +116,36 @@ function renderPosts() {
       tagsContainer.appendChild(tag);
     });
 
-    meta.append(time, tagsContainer);
+    metaLeft.append(time, tagsContainer);
+
+    // Right Side: Views & Likes Placeholders
+    const stats = document.createElement("div");
+    stats.className = "post-stats";
+    stats.innerHTML = `
+      <span class="stat-item" title="Views">
+        <svg class="stat-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7z"></path>
+          <circle cx="12" cy="12" r="3"></circle>
+        </svg>
+        <span class="view-val">—</span>
+      </span>
+      <span class="stat-item" title="Likes">
+        <svg class="stat-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M14 9V5a3 3 0 0 0-3-3l-4 9v11h11.28a2 2 0 0 0 2-1.7l1.38-9a2 2 0 0 0-2-2.3zM7 22H4a2 2 0 0 1-2-2v-7a2 2 0 0 1 2-2h3"></path>
+        </svg>
+        <span class="like-val">—</span>
+      </span>
+    `;
+
+    // Asynchronously update metric values from CounterAPI
+    getMetrics(slug).then(({ views, likes }) => {
+      const vEl = stats.querySelector(".view-val");
+      const lEl = stats.querySelector(".like-val");
+      if (vEl) vEl.textContent = views;
+      if (lEl) lEl.textContent = likes;
+    });
+
+    meta.append(metaLeft, stats);
 
     const link = document.createElement("a");
     link.className = "post-title";

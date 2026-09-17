@@ -149,6 +149,16 @@
   <p>
     "Come on, mon ami, off we go again."
   </p>
+  <div class="post-like-container">
+    <p>Liked this post? Give it a thumbs up</p>
+    <button id="like-btn" class="like-button">
+      <svg class="stat-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M14 9V5a3 3 0 0 0-3-3l-4 9v11h11.28a2 2 0 0 0 2-1.7l1.38-9a2 2 0 0 0-2-2.3zM7 22H4a2 2 0 0 1-2-2v-7a2 2 0 0 1 2-2h3"></path>
+      </svg>
+      <span id="like-count">0</span>
+    </button>
+  </div>
+  <hr />
 </main>
 
 <nav aria-label="Links">
@@ -160,5 +170,36 @@
 
 <script src="../js/script.js"></script>
 <script src="../js/theme.js"></script>
+<script src="../js/counters.js"></script>
+<script>
+  document.addEventListener("DOMContentLoaded", async () => {
+    // Extract slug from current pathname (e.g. /blogs/my-post.html -> my-post)
+    const path = window.location.pathname;
+    const slug = path.substring(path.lastIndexOf("/") + 1).replace(".html", "");
+
+    // 1. Record view count on hit
+    recordView(slug);
+
+    // 2. Fetch and set initial likes
+    const likeBtn = document.getElementById("like-btn");
+    const likeCountSpan = document.getElementById("like-count");
+    
+    const metrics = await getMetrics(slug);
+    likeCountSpan.textContent = metrics.likes;
+
+    if (isPostLiked(slug)) {
+      likeBtn.classList.add("liked");
+    }
+
+    // 3. Toggle like click event
+    likeBtn.addEventListener("click", async () => {
+      const res = await recordLike(slug);
+      if (res) {
+        likeCountSpan.textContent = res.likes;
+        likeBtn.classList.toggle("liked", res.liked);
+      }
+    });
+  });
+</script>
 </body>
 </html>
