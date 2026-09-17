@@ -1,13 +1,8 @@
 <!--
   blog.html — Blog index.
 
-  Lists every post as a title + one-line summary. The list itself is
-  rendered by js/blog.js from the manifest in js/posts.js — this file has
-  no hardcoded posts. To publish a new post, edit js/posts.js, not this
-  file. See README.md and blogs/README.md for the full workflow.
-
-  Styles:  css/styles.css, css/blog.css
-  Scripts: js/script.js (orb), js/posts.js (data), js/blog.js (renders list)
+  Lists every post as a title + category badge + one-line summary.
+  The list itself is rendered by js/blog.js from the manifest in js/posts.js.
 -->
 <!DOCTYPE html>
 <html lang="en">
@@ -32,8 +27,8 @@
 
 <header class="topnav">
   <div class="topnav-links">
-    <a href="/index" class="topnav-link active">Home</a>
-    <a href="/blog" class="topnav-link">Blog</a>
+    <a href="/index" class="topnav-link">Home</a>
+    <a href="/blog" class="topnav-link active">Blog</a>
     <a href="/game" class="topnav-link">Quick Dopamine Hit</a>
     <a href="/contact" class="topnav-link">Contact</a>
   </div>
@@ -43,6 +38,21 @@
 <main class="blog-main">
   <h1 class="page-title">Blog</h1>
   <p class="page-lede">Notes on tech that I find interesting, life, and whatever else I'm chewing on.</p>
+
+  <!-- Toolbar: Category Filter + Search Bar -->
+  <div class="blog-toolbar">
+    <div class="category-filter-bar">
+      <button class="filter-btn active" data-category="all">All</button>
+      <button class="filter-btn" data-category="Tech">Tech</button>
+      <button class="filter-btn" data-category="Life">Life</button>
+      <button class="filter-btn" data-category="Peak">Peak</button>
+    </div>
+
+    <div class="search-box">
+      <input type="text" id="search-input" placeholder="Search for keywords or labels in posts" aria-label="Search for keywords or labels in posts" />
+      <span class="search-icon" aria-hidden="true">🔍</span>
+    </div>
+  </div>
 
   <ul id="post-list" class="post-list"></ul>
 </main>

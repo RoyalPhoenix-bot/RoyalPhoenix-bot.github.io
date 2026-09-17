@@ -16,13 +16,15 @@ const posts = [
       "There is an art, or rather, a knack to flying. The knack lies in learning how to throw yourself at the ground and miss. You’ll have so many opportunities to throw yourself at the ground, all you have to do is to learn how to miss it.",
     date: "2024-06-22",
     file: "/blogs/ive-left",
+    category: "Life",
   },
   {
     title: "The Uncertainitinometer",
     summary:
-      "My attempt at rewriting Agatha Christie's Wasps' Nest into a sci-fi theme. This was written in 3 hours as part of an end-sem exam, so do gimme the benefit of doubt.",
+      "My attempt at rewriting Agatha Christie's Wasps' Nest into a sci-fi theme. This was written in 3 hours as part of an end-sem exam, and in my opinion it turned out quite well.",
     date: "2023-04-30",
     file: "/blogs/the-uncertainitinometer",
+    category: "Peak",
   },
   {
     title: "The Queen's Gambit",
@@ -30,6 +32,7 @@ const posts = [
       "Opening theory for beginners - The Queen's Gambit. This is the only opening with White that I know since I was heaving inspired by the serires.",
     date: "2021-06-06",
     file: "/blogs/queens-gambit",
+    category: "Peak",
   },
   // {
   //   title: "Why I Rebuilt My Profiler in Rust",
