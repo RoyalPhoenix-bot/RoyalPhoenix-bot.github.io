@@ -14,7 +14,7 @@
   min-height: 80vh;
   max-width: 760px;
   margin: 0 auto;
-  padding: 6vh 6vw 12vh;
+  padding: 1.5rem 6vw 12vh; 
   display: block;
 }
 
@@ -208,6 +208,6 @@
 @media (max-width: 820px) {
   .blog-main,
   .post-main {
-    padding: 4vh 8vw 8vh;
+    padding: 1rem 8vw 8vh;
   }
 }
