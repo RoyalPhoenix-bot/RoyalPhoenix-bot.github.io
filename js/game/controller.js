@@ -86,8 +86,16 @@ export function initGameSection() {
     cells.forEach((cell, idx) => {
       const val = state.board[idx];
       cell.textContent = val ? val : "";
+      
+      // Ensure winning-cell class is cleared if winningLine is null/empty
+      if (state.winningLine && state.winningLine.includes(idx)) {
+        cell.classList.add("winning-cell");
+      } else {
+        cell.classList.remove("winning-cell");
+      }
+
+      // Disable cell during active play if occupied, or if game is over
       cell.disabled = !!val || state.isGameOver;
-      cell.classList.toggle("winning-cell", state.winningLine?.includes(idx));
     });
 
     if (state.isGameOver) {

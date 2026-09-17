@@ -262,8 +262,8 @@ p a:hover {
 .ttt-cell {
   aspect-ratio: 1;
   background: var(--bg);
-  border: 1px solid var(--line);
-  color: var(--text);
+  border: 1px solid #ffd700 !important;
+  color: #ffd700;
   font-family: "Italiana", serif;
   font-size: 2rem;
   font-weight: bold;
@@ -277,9 +277,8 @@ p a:hover {
 }
 
 .ttt-cell.winning-cell {
-  border-color: var(--accent);
-  color: var(--accent);
-  background: rgba(201, 165, 112, 0.1);
+  border-color: #ffe600;
+  box-shadow: 0 0 10px #ffd700;
 }
 
 .btn {

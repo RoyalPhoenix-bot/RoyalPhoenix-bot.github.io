@@ -7,14 +7,14 @@ async function initDuolingoStreak() {
       if (!res.ok) throw new Error("Failed to load duolingo.json");
   
       const data = await res.json();
-      
-      // Handles both raw object output and primitive numbers
       const streakValue = typeof data.streak === "object" ? data.streak?.length : data.streak;
-      
-      streakEl.textContent = `${streakValue ?? "—"}d`;
+  
+      streakEl.textContent = streakValue ?? "—";
     } catch (err) {
-      console.error("Error reading streak:", err);
+      console.error("Error loading Duolingo streak:", err);
       streakEl.textContent = "—";
     }
   }
+  
+  document.addEventListener("DOMContentLoaded", initDuolingoStreak);
   
