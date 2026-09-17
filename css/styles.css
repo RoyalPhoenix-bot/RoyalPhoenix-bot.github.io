@@ -496,3 +496,218 @@ p a:hover {
     padding: 4vh 6vw 8vh;
   }
 }
+
+/* Contact Page Layout */
+.contact-main {
+  position: relative;
+  z-index: 1;
+  display: block; /* Overrides the home page generic 2-column grid layout */
+  max-width: 960px;
+  margin: 0 auto;
+  padding: 1.5rem 6vw 12vh;
+}
+
+/* 1. Header Centering Alignment */
+.contact-header {
+  display: flex;
+  align-items: center;
+  gap: 2.5rem;
+  margin-bottom: 3rem;
+}
+
+.contact-header .page-title {
+  margin: 0;
+  white-space: nowrap;
+}
+
+.contact-header .page-lede {
+  margin: 0;
+}
+
+/* 2. Side-by-Side Body Grid */
+.contact-body-grid {
+  display: grid;
+  grid-template-columns: 240px 1fr;
+  gap: 2.5rem;
+  align-items: start;
+}
+
+/* 3. 2 Rows x 3 Columns Social Icons Grid */
+.social-grid-2x3 {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0.85rem;
+}
+
+.social-icon-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  aspect-ratio: 1;
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  color: var(--muted);
+  transition: all 0.25s ease;
+}
+
+.social-icon-btn:hover {
+  border-color: var(--accent);
+  color: var(--text);
+  transform: translateY(-2px);
+}
+
+/* Reduce SVG size inside the 3x2 grid buttons */
+.social-icon-btn .social-icon {
+  width: 42px;
+  height: 42px;
+}
+
+/* Chess.com Live Badge Component */
+.chess-badge-container {
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  padding: 1.5rem;
+}
+
+.chess-badge-header {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  margin-bottom: 1.25rem;
+}
+
+.chess-badge-header h2 {
+  font-family: "Italiana", serif;
+  font-size: 1.25rem;
+  margin: 0;
+  color: var(--text);
+}
+
+.profile-link {
+  margin-left: auto;
+  color: var(--muted);
+  font-size: 0.85rem;
+  text-decoration: none;
+}
+
+.profile-link:hover {
+  color: var(--accent);
+}
+
+.live-dot {
+  width: 8px;
+  height: 8px;
+  background: #46d369;
+  border-radius: 50%;
+  box-shadow: 0 0 8px #46d369;
+}
+
+/* Single unified 4-column Chess Stats Grid with Icons */
+.chess-stats-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1rem;
+}
+
+.stat-card {
+  background: var(--bg);
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  padding: 0.8rem 0.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+  text-align: center;
+}
+
+.stat-header {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.4rem;
+  margin-bottom: 0.3rem;
+}
+
+.stat-label {
+  font-size: 0.75rem;
+  color: var(--muted);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.stat-val {
+  font-family: "Italiana", serif;
+  font-size: 1.5rem;
+  color: var(--text);
+}
+
+.mode-icon {
+  width: 14px;
+  height: 14px;
+  color: var(--accent);
+}
+
+/* Responsive Stacking */
+@media (max-width: 820px) {
+  .contact-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.8rem;
+  }
+
+  .contact-body-grid {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+
+  .social-grid-2x3 {
+    max-width: 280px;
+  }
+
+  .chess-stats-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+/* Standalone Centered Duolingo Badge */
+.duolingo-badge-container {
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  padding: 1.25rem 1.5rem;
+  max-width: 320px;
+  margin: 2.5rem auto 0; /* Centers the box horizontally */
+  text-align: center;
+}
+
+.duolingo-badge-header {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  margin-bottom: 0.6rem;
+}
+
+.duolingo-badge-header h2 {
+  font-family: "Italiana", serif;
+  font-size: 1.15rem;
+  margin: 0;
+  color: var(--text);
+}
+
+.duolingo-badge-header .profile-link {
+  font-size: 0.8rem;
+  color: var(--muted);
+}
+
+.fire-icon {
+  font-size: 1.1rem;
+}
+
+.duolingo-stat .stat-val {
+  font-family: "Italiana", serif;
+  font-size: 1.8rem;
+  color: var(--accent);
+}
