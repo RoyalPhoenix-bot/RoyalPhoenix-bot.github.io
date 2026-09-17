@@ -322,9 +322,8 @@
 <script src="../js/counters.js"></script>
 <script>
   document.addEventListener("DOMContentLoaded", async () => {
-    // Extract slug from current pathname (e.g. /blogs/my-post.html -> my-post)
-    const path = window.location.pathname;
-    const slug = path.substring(path.lastIndexOf("/") + 1).replace(".html", "");
+    // Standardized slug extraction
+    const slug = getPostSlug(window.location.pathname);
 
     // 1. Record view count on hit
     recordView(slug);

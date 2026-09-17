@@ -5,8 +5,10 @@
 const NAMESPACE = "kushu"; // Change this to any unique string for your site
 const BASE_URL = `https://api.counterapi.dev/v1/${NAMESPACE}`;
 
-function getPostSlug(file) {
-  return file.replace(/^blogs\//, "").replace(/\.html$/, "");
+// Standardized slug helper for both blog index and post pages
+function getPostSlug(fileOrPath) {
+  if (!fileOrPath) return "";
+  return fileOrPath.split("/").filter(Boolean).pop().replace(/\.html$/, "");
 }
 
 // Fetch view and like counts without modifying them
