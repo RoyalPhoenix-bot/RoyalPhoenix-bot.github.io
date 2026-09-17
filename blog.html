@@ -14,7 +14,7 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<meta name="description" content="Blogs — Kushagra Sharma." />
+<meta name="description" content="Blogs - Kushagra Sharma." />
 <title>Blogs — Kushagra</title>
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -31,10 +31,13 @@
 <div class="orb" aria-hidden="true"></div>
 
 <header class="topnav">
-  <a href="/index" class="topnav-link">Home</a>
-  <a href="/blog" class="topnav-link active">Blog</a>
-  <a href="/game" class="topnav-link">Quick Dopamine Hit</a>
-  <a href="/contact" class="topnav-link">Contact</a>
+  <div class="topnav-links">
+    <a href="/index" class="topnav-link active">Home</a>
+    <a href="/blog" class="topnav-link">Blog</a>
+    <a href="/game" class="topnav-link">Quick Dopamine Hit</a>
+    <a href="/contact" class="topnav-link">Contact</a>
+  </div>
+  <button id="theme-toggle" class="theme-toggle-btn" aria-label="Toggle Theme">🌙</button>
 </header>
 
 <main class="blog-main">
@@ -53,5 +56,6 @@
 
 <script src="js/posts.js"></script>
 <script src="js/blog.js"></script>
+<script src="js/theme.js"></script>
 </body>
 </html>

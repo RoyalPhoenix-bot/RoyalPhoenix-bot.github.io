@@ -13,12 +13,24 @@ html {
   scroll-behavior: smooth;
 }
 
+/* Default Dark Theme Tokens */
 :root {
   --bg: #0b0b0d;
   --text: #f3f1ec;
   --muted: #9c9aa1;
   --accent: #c9a570;
   --line: rgba(243, 241, 236, 0.12);
+  --card-bg: rgba(255, 255, 255, 0.02);
+}
+
+/* Light Theme Overrides */
+body.light-mode {
+  --bg: #f9f8f6;
+  --text: #1a1a1c;
+  --muted: #666469;
+  --accent: #9a7640;
+  --line: rgba(26, 26, 28, 0.15);
+  --card-bg: rgba(0, 0, 0, 0.03);
 }
 
 * {
@@ -38,6 +50,7 @@ body {
   font-weight: 300;
   overflow-x: hidden;
   position: relative;
+  transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 /* ambient texture, unchanged from the original hero */
@@ -60,11 +73,20 @@ body {
   position: relative;
   z-index: 3;
   display: flex;
-  gap: 2rem;
+  justify-content: space-between;
   align-items: center;
   max-width: 1280px;
   margin: 0 auto;
   padding: 3rem 6vw 1.5rem; /* Generous bottom padding to push <main> down */
+}
+
+/* Nav links wrapper with explicit flex gap */
+.topnav-links,
+.nav-links {
+  display: flex;
+  align-items: center;
+  gap: 2.25rem;
+  flex-wrap: wrap;
 }
 
 .topnav-link {
@@ -75,6 +97,7 @@ body {
   padding-bottom: 0.4rem;
   border-bottom: 1px solid transparent;
   transition: color 0.25s ease, border-color 0.25s ease;
+  white-space: nowrap;
 }
 
 .topnav-link:hover,
@@ -84,6 +107,29 @@ body {
 
 .topnav-link.active {
   color: var(--text);
+  border-color: var(--accent);
+}
+
+/* Theme Toggle Button */
+.theme-toggle-btn {
+  background: transparent;
+  border: 1px solid var(--line);
+  color: var(--text);
+  border-radius: 50%;
+  width: 36px;
+  height: 36px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1rem;
+  margin-left: 2rem;
+  flex-shrink: 0;
+  transition: transform 0.2s ease, border-color 0.25s ease, color 0.25s ease;
+}
+
+.theme-toggle-btn:hover {
+  transform: scale(1.1);
   border-color: var(--accent);
 }
 
@@ -218,12 +264,12 @@ nav a:focus-visible {
 p a {
   color: inherit;               /* Uses the parent <p> element's text color */
   text-decoration: underline;   /* Keeps the underline */
-  text-decoration-color: #888;  /* Subtle, muted underline color */
+  text-decoration-color: var(--muted);  /* Subtle, muted underline color */
   text-underline-offset: 3px;   /* Slight space between text and underline */
 }
 
 p a:hover {
-  text-decoration-color: inherit; /* Darkens underline when hovered */
+  text-decoration-color: var(--accent); /* Darkens/highlights underline when hovered */
 }
 
 /* Quick Dopamine Hit Component */
@@ -231,7 +277,7 @@ p a:hover {
   max-width: 480px;
   margin: 3rem auto;
   padding: 1.5rem;
-  background: rgba(255, 255, 255, 0.02);
+  background: var(--card-bg);
   border: 1px solid var(--line);
   border-radius: 8px;
   text-align: center;
@@ -281,6 +327,23 @@ p a:hover {
   box-shadow: 0 0 10px #ffd700;
 }
 
+/* Light Theme Overrides for Tic-Tac-Toe Grid */
+body.light-mode .ttt-cell {
+  background: #eae6df;
+  border-color: #8b6508 !important;
+  color: #8b6508;
+}
+
+body.light-mode .ttt-cell:hover:not(:disabled) {
+  border-color: var(--accent);
+  background: #e0dad0;
+}
+
+body.light-mode .ttt-cell.winning-cell {
+  border-color: #8b6508;
+  box-shadow: 0 0 10px rgba(139, 101, 8, 0.4);
+}
+
 .btn {
   background: transparent;
   color: var(--text);
@@ -308,16 +371,24 @@ p a:hover {
   color: #000;
 }
 
-/* Nuke Overlay & Animation */
+/* Nuke Overlay & Animation (Enforced Dark Background & Light Text) */
 .nuke-overlay {
   position: fixed;
   inset: 0;
   z-index: 9999;
-  background: #000;
+  background: #000 !important;
+  color: #f3f1ec !important;
   display: flex;
   align-items: center;
   justify-content: center;
   overflow: hidden;
+}
+
+.nuke-overlay,
+.nuke-overlay p,
+.nuke-overlay span,
+.nuke-overlay div {
+  color: #f3f1ec;
 }
 
 .nuke-missile {
@@ -373,7 +444,7 @@ p a:hover {
 .nuke-status-text {
   font-family: "Italiana", serif;
   font-size: 1.5rem;
-  color: var(--text);
+  color: #f3f1ec !important;
   line-height: 1.5;
   margin-bottom: 1.5rem;
   min-height: 3em;
@@ -381,7 +452,7 @@ p a:hover {
 
 .reboot-timer {
   font-size: 1.1rem;
-  color: var(--accent);
+  color: #c9a570 !important;
   opacity: 0;
   transition: opacity 0.4s ease;
 }
@@ -403,7 +474,7 @@ p a:hover {
 }
 
 .marvin-bounty {
-  background: rgba(201, 165, 112, 0.05);
+  background: var(--card-bg);
   border-left: 2px solid var(--accent);
   padding: 1rem 1.25rem;
   border-radius: 0 4px 4px 0;
@@ -543,7 +614,7 @@ p a:hover {
   align-items: center;
   justify-content: center;
   aspect-ratio: 1;
-  background: rgba(255, 255, 255, 0.02);
+  background: var(--card-bg);
   border: 1px solid var(--line);
   border-radius: 8px;
   color: var(--muted);
@@ -564,7 +635,7 @@ p a:hover {
 
 /* Chess.com Live Badge Component */
 .chess-badge-container {
-  background: rgba(255, 255, 255, 0.02);
+  background: var(--card-bg);
   border: 1px solid var(--line);
   border-radius: 8px;
   padding: 1.5rem;
@@ -672,7 +743,7 @@ p a:hover {
 
 /* Standalone Centered Duolingo Badge */
 .duolingo-badge-container {
-  background: rgba(255, 255, 255, 0.02);
+  background: var(--card-bg);
   border: 1px solid var(--line);
   border-radius: 8px;
   padding: 1.25rem 1.5rem;
