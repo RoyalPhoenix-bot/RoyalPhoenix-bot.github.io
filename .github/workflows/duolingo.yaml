@@ -21,14 +21,17 @@ jobs:
             const fs = require("fs");
             async function run() {
               try {
-                const res = await fetch("https://www.duolingo.com/2017-06-30/users?username=kushu42&fields=streak", {
+                const url = "https://www.duolingo.com/2017-06-30/users?username=kushu42";
+                const res = await fetch(url, {
                   headers: {
                     "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/122.0.0.0 Safari/537.36",
                     "Accept": "application/json"
                   }
                 });
                 const data = await res.json();
-                const streak = data.users?.[0]?.streak ?? 0;
+                const user = data.users?.[0];
+                const streak = user?.streak?.length ?? user?.siteStreak ?? user?.streakData?.currentStreak ?? 0;
+                
                 fs.writeFileSync("duolingo.json", JSON.stringify({ streak }));
                 console.log("Successfully retrieved streak:", streak);
               } catch (err) {
