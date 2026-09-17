@@ -30,7 +30,10 @@ jobs:
                 });
                 const data = await res.json();
                 const user = data.users?.[0];
-                const streak = user?.streak?.length ?? user?.siteStreak ?? user?.streakData?.currentStreak ?? 0;
+                
+                // Extract numeric value from object or primitive fallback
+                const rawStreak = user?.streak ?? user?.siteStreak ?? user?.streakData?.currentStreak ?? 0;
+                const streak = typeof rawStreak === "object" ? (rawStreak.length ?? 0) : rawStreak;
                 
                 fs.writeFileSync("duolingo.json", JSON.stringify({ streak }));
                 console.log("Successfully retrieved streak:", streak);
