@@ -1,4 +1,21 @@
-- name: Fetch Duolingo Streak
+name: Update Duolingo Streak
+
+on:
+  schedule:
+    - cron: "0 0 * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  update-streak:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+
+      - name: Fetch Duolingo Streak
         run: |
           node -e '
             const fs = require("fs");
@@ -21,3 +38,10 @@
             }
             run();
           '
+
+      - name: Commit and push updates
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add duolingo.json
+          git diff --quiet && git diff --staged --quiet || (git commit -m "Update Duolingo streak" && git push)
