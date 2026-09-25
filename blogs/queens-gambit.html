@@ -256,29 +256,36 @@
 <script src="../js/counters.js"></script>
 <script>
   document.addEventListener("DOMContentLoaded", async () => {
-    // Standardized slug extraction
+    // Automatically derives "my-new-post" from path
     const slug = getPostSlug(window.location.pathname);
 
-    // 1. Record view count on hit
-    recordView(slug);
+    // 1. Record page view on load
+    await recordView(slug);
 
-    // 2. Fetch and set initial likes
-    const likeBtn = document.getElementById("like-btn");
-    const likeCountSpan = document.getElementById("like-count");
-    
+    // 2. Load metrics into UI elements
     const metrics = await getMetrics(slug);
-    likeCountSpan.textContent = metrics.likes;
+    const likeCountSpan = document.getElementById("like-count");
+    const likeBtn = document.getElementById("like-btn");
+
+    if (likeCountSpan) likeCountSpan.textContent = metrics.likes;
 
     if (isPostLiked(slug)) {
       likeBtn.classList.add("liked");
     }
 
-    // 3. Toggle like click event
+    // 3. Handle Like Button Clicks
     likeBtn.addEventListener("click", async () => {
+      likeBtn.disabled = true;
       const res = await recordLike(slug);
-      if (res) {
+      likeBtn.disabled = false;
+
+      if (res && res.likes !== undefined) {
         likeCountSpan.textContent = res.likes;
-        likeBtn.classList.toggle("liked", res.liked);
+        if (res.liked) {
+          likeBtn.classList.add("liked");
+        } else {
+          likeBtn.classList.remove("liked");
+        }
       }
     });
   });
