@@ -34,11 +34,12 @@ const posts = [
     file: "/blogs/queens-gambit",
     category: "Peak",
   },
-  // {
-  //   title: "Why I Rebuilt My Profiler in Rust",
-  //   summary:
-  //     "A short account of chasing a 3x latency regression down to the metal, and what it taught me about tooling.",
-  //   date: "2026-09-01",
-  //   file: "/blogs/sample-post",
-  // },
+  {
+    title: "To GC or not to GC",
+    summary:
+      "My take on why I think garbage collectors are just overpaid room-cleaning services for code that shouldn't have thrown its garbage on the floor in the first place.",
+    date: "2025-10-05",
+    file: "/blogs/to-gc-or-not-to-gc",
+    category: "Tech",
+  },
 ];

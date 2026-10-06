@@ -1,0 +1,128 @@
+<!--
+  blogs/to-gc-or-not-to-gc.html — Blog post.
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta name="description" content="To GC or not to GC" />
+<title>To GC or not to GC</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link
+  href="https://fonts.googleapis.com/css2?family=Italiana&family=Outfit:wght@300;400;500&display=swap"
+  rel="stylesheet"
+/>
+<link rel="stylesheet" href="../css/styles.css" />
+<link rel="stylesheet" href="../css/blog.css" />
+<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><circle cx=%2250%22 cy=%2250%22 r=%2250%22 fill=%22%23121212%22/><text x=%2250%25%22 y=%2255%25%22 dominant-baseline=%22middle%22 text-anchor=%22middle%22 font-size=%2260%22 font-weight=%22bold%22 fill=%22%23ffd700%22 font-family=%22sans-serif%22>K</text></svg>">
+</head>
+<body>
+<div class="grain" aria-hidden="true"></div>
+<div class="orb" aria-hidden="true"></div>
+
+<header class="topnav">
+  <div class="topnav-links">
+    <a href="/index" class="topnav-link active">Home</a>
+    <a href="/blog" class="topnav-link">Blog</a>
+    <a href="/game" class="topnav-link">Quick Dopamine Hit</a>
+    <a href="/contact" class="topnav-link">Contact</a>
+  </div>
+  <button id="theme-toggle" class="theme-toggle-btn" aria-label="Toggle Theme">🌙</button>
+</header>
+
+<main class="post-main">
+  <a href="/blog" class="back-link">&larr; Back to all posts</a>
+
+  <time datetime="2026-10-07">October 7, 2026</time>
+  <h1>To GC or not to GC</h1>
+
+  <p>
+    Nobody has ever given me a compelling reason why the software industry has embraced languages that do not require engineers to free memory once an object goes out of scope, other than ‘developer velocity’. We traded memory safety for the ability to pretend that RAM is an infinite, free resource. As AI improves, I hope that, eventually, everyone will write code in Rust, if not C or C++.
+  </p>
+
+  <p>
+    If you’re among the vast majority that enjoys coding in the JVM, you should understand what happens to memory. The garbage collector (GC) clears allocated memory at runtime. Traditional GCs like G1GC and Parallel are basically hoarders with anxiety-they refuse to throw away a single byte of memory until they’re 100% sure your code won't come crawling back for it. Newer algorithms, like ZGC, are more optimistic, sure, but at the end of the day, they’re still just an expensive room-cleaning service for the mess your code shouldn't have made in the first place.
+  </p>
+
+  <p>
+    In two isolated servers running the same code—one on the JVM and one in Rust—the JVM server used a maximum of ~2.5 GB of memory, while the Rust server used ~100 MB for the same handler. As RAM becomes scarcer and more expensive, I wonder how long it will take software companies to realize how much memory they could save by simply asking AI to rewrite their code in a more performant language.
+  </p>
+
+  <p>
+    While building a system written in a language that uses GC, I believe it is imperative to also spend time in reasoning how strong of a GC trigger one needs. Though GC algorithms are mostly treated as black boxes, there are ways to tweak its frequency in order to adjust the heap memory more to your liking. In JVM there are hundreds of -Xms / -Xmx flags that allow tweaking of ‘when’ a GC event should be triggered. For example, you could lower your max heap memory by triggering GC events at a lower heap occupancy threshold, or switching to a better GC algorithm, or perhaps even writing System.gc() calls after literally every function in code (hehe).
+  </p>
+
+  <p>
+    Increasing the frequency/thresholds of your GC triggers would also help smoothen out some of the CPU spikes that you observe during the execution of your service (provide the incoming QPS remained the same). The spikes for a JVM service would, most likely, be due to a big ‘stop-the-world’ GC pause, especially if you’re running an old GC algorithm (like G1GC/ParallelGC). If done correctly, it could also prevent a few alerts that you dismiss as being ‘intermittent issues’.
+  </p>
+
+  <p>
+    The tradeoff you would have to consider here is that triggering GC at a higher frequency would cause a small bump in the average CPU utilization. In my opinion, the improvements in memory should outweigh the bump in CPU utilization. While experimenting further with the same JVM server (mentioned earlier), explicitly recommending the system to trigger GC every 2 minutes (via System.gc() calls), saw a 5% increase in CPU utililzation while the max heap usage dropped from ~2.5GB to ~600MB.
+  </p>
+
+  <p>
+    As AI removes more and more coding bottlenecks, and system design becomes the ‘new coding’, I really hope that memory management is given higher importance than what it receives today. While designing modern systems, most people focus and argue over kafka partitions and db indexes, yet completely ignore the fact that application node themselves are drowning in RAM bloat. If we treat database indexing as some sacred art, why hasn’t tuning language runtime become the most common spell in the book?
+  </p>
+
+  <div class="post-like-container">
+    <p>Liked this post? Give it a thumbs up</p>
+    <button id="like-btn" class="like-button">
+      <svg class="stat-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M14 9V5a3 3 0 0 0-3-3l-4 9v11h11.28a2 2 0 0 0 2-1.7l1.38-9a2 2 0 0 0-2-2.3zM7 22H4a2 2 0 0 1-2-2v-7a2 2 0 0 1 2-2h3"></path>
+      </svg>
+      <span id="like-count">0</span>
+    </button>
+  </div>
+  <hr />
+</main>
+
+<nav aria-label="Links">
+  <a href="https://github.com/RoyalPhoenix-bot" rel="noopener noreferrer">GitHub</a>
+  <a href="https://www.linkedin.com/in/kushagra-sharma-363865210/" rel="noopener noreferrer">LinkedIn</a>
+  <a href="https://x.com/iambigbread" rel="noopener noreferrer">X</a>
+  <a href="mailto:kushagrasharma.sharma@gmail.com">Email</a>
+</nav>
+
+<script src="../js/script.js"></script>
+<script src="../js/theme.js"></script>
+<script src="../js/counters.js"></script>
+<script>
+  document.addEventListener("DOMContentLoaded", async () => {
+    // Automatically derives "to-gc-or-not-to-gc" from path
+    const slug = getPostSlug(window.location.pathname);
+
+    // 1. Record page view on load
+    await recordView(slug);
+
+    // 2. Load metrics into UI elements
+    const metrics = await getMetrics(slug);
+    const likeCountSpan = document.getElementById("like-count");
+    const likeBtn = document.getElementById("like-btn");
+
+    if (likeCountSpan) likeCountSpan.textContent = metrics.likes;
+
+    if (isPostLiked(slug)) {
+      likeBtn.classList.add("liked");
+    }
+
+    // 3. Handle Like Button Clicks
+    likeBtn.addEventListener("click", async () => {
+      likeBtn.disabled = true;
+      const res = await recordLike(slug);
+      likeBtn.disabled = false;
+
+      if (res && res.likes !== undefined) {
+        likeCountSpan.textContent = res.likes;
+        if (res.liked) {
+          likeBtn.classList.add("liked");
+        } else {
+          likeBtn.classList.remove("liked");
+        }
+      }
+    });
+  });
+</script>
+</body>
+</html>
