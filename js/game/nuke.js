@@ -1,3 +1,5 @@
+import { recordRickRollClick } from "./counters.js";
+
 // Handles 8-second slow-motion Nuke Missile Animation & 42-Second Reboot Timer
 export class NukeSequence {
   static audioCtx = null;
@@ -86,11 +88,19 @@ export class NukeSequence {
           <span class="timer-number">42</span>s remaining...
         </div>
         <div class="nuke-dopamine-link" style="display: none; margin-top: 15px;">
-          <p>Getting bored? Watch this <a href="https://youtu.be/dQw4w9WgXcQ" target="_blank" rel="noopener noreferrer" style="color: #ffd700; text-decoration: underline;">hilarious video</a> for extra dopamine ⚡</p>
+          <p>Getting bored? Watch this <a id="rick-roll-link" href="https://youtu.be/dQw4w9WgXcQ" target="_blank" rel="noopener noreferrer" style="color: #ffd700; text-decoration: underline;">hilarious video</a> for extra dopamine ⚡</p>
         </div>
       </div>
     `;
     containerEl.appendChild(overlay);
+
+    // Bind click event to increment Curiosity Incidents counter
+    const rickLink = overlay.querySelector("#rick-roll-link");
+    if (rickLink) {
+      rickLink.addEventListener("click", () => {
+        recordRickRollClick();
+      });
+    }
 
     // 1. Launch missile & trigger 8-second descent sound
     setTimeout(() => {

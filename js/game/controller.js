@@ -1,5 +1,6 @@
 import { TicTacToe } from "./tictactoe.js";
 import { NukeSequence } from "./nuke.js";
+import { loadGameMetrics, recordMarvinWin, recordMarvinDefeat } from "./counters.js";
 
 const MARVIN_QUOTES = [
   "Brain the size of a planet, and you ask me to play Tic-Tac-Toe.",
@@ -33,8 +34,27 @@ export function initGameSection() {
         <button id="rematch-btn" class="btn btn-rematch" style="display:none;">Rematch</button>
         <button id="nuke-btn" class="btn btn-nuke" style="display:none;">💥 Nuke Marvin</button>
       </div>
+
+      <!-- Game Counters Section -->
+      <div id="game-counters" class="game-counters-container" style="margin-top: 25px; padding-top: 15px; border-top: 1px solid rgba(255, 255, 255, 0.1); display: flex; justify-content: space-around; font-size: 0.9em; opacity: 0.9;">
+        <div class="counter-item">
+          <span class="counter-label">Marvin's Victories: </span>
+          <strong id="count-marvin-wins" class="counter-value">...</strong>
+        </div>
+        <div class="counter-item">
+          <span class="counter-label">Marvin Defeats: </span>
+          <strong id="count-marvin-defeats" class="counter-value">...</strong>
+        </div>
+        <div class="counter-item">
+          <span class="counter-label">Curiosity Incidents: </span>
+          <strong id="count-rick-roll" class="counter-value">...</strong>
+        </div>
+      </div>
     </section>
   `;
+
+  // Fetch initial counts on DOM mount
+  loadGameMetrics();
 
   const gridEl = root.querySelector("#grid");
   const rematchBtn = root.querySelector("#rematch-btn");
@@ -74,6 +94,9 @@ export function initGameSection() {
     nukeBtn.style.display = "none";
     rematchBtn.style.display = "none";
     
+    // Record Marvin Defeat
+    recordMarvinDefeat();
+
     NukeSequence.trigger(document.body, () => {
       rematchCount = 0;
       dialogueEl.textContent = `"I've calculated your chances of winning..."`;
@@ -102,6 +125,7 @@ export function initGameSection() {
       rematchBtn.style.display = "inline-block";
       if (state.result === "O") {
         dialogueEl.textContent = `"Predictable. I won, again."`;
+        recordMarvinWin(); // Record Marvin Victory
       } else if (state.result === "draw") {
         dialogueEl.textContent = `"A draw. How thrillingly pointlessly symmetrical."`;
       }

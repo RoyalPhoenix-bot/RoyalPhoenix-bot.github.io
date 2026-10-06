@@ -29,21 +29,27 @@
   <button id="theme-toggle" class="theme-toggle-btn" aria-label="Toggle Theme">🌙</button>
 </header>
 
-<main class="game-page-main">
-  <!-- Left Side: Marvin Persona & Rules -->
-  <div class="marvin-intro">
-    <h1 class="page-title">Quick Dopamine Hit ⚡</h1>
-    <p class="marvin-bio">
-      Meet <strong>Marvin</strong> 🤖: an android equipped with the Genuine People Personalities technology, possessing a brain the size of a planet, and burdened with severe, chronic depression. He has analyzed 10<sup>22</sup> possible futures, solved the grand mysteries of quantum gravity, and yet here he sits-forced to play Tic-Tac-Toe with you.
-    </p>
-    <div class="marvin-bounty">
-      <p>☕ <strong>The Bounty:</strong> If you somehow manage to beat Marvin in 5 attempts or fewer, I will personally buy you a coffee. No catch.</p>
-      <p>⚡ <strong>The Secret:</strong> If you survive 5 attempts of losing or drawing, you will unlock an absolute superpower designed specifically to assist you in "defeating" Marvin.</p>
+<main class="game-page-wrapper">
+  <!-- Top 2-Column Grid -->
+  <div class="game-page-main">
+    <!-- Left Side: Marvin Persona & Rules -->
+    <div class="marvin-intro">
+      <h1 class="page-title">Quick Dopamine Hit ⚡</h1>
+      <p class="marvin-bio">
+        Meet <strong>Marvin</strong> 🤖: an android equipped with the Genuine People Personalities technology, possessing a brain the size of a planet, and burdened with severe, chronic depression. He has analyzed 10<sup>22</sup> possible futures, solved the grand mysteries of quantum gravity, and yet here he sits—forced to play Tic-Tac-Toe with you.
+      </p>
+      <div class="marvin-bounty">
+        <p>☕ <strong>The Bounty:</strong> If you somehow manage to beat Marvin in 5 attempts or fewer, I will personally buy you a coffee. No catch.</p>
+        <p>⚡ <strong>The Secret:</strong> If you survive 5 attempts of losing or drawing, you will unlock an absolute superpower designed specifically to assist you in "defeating" Marvin.</p>
+      </div>
     </div>
+
+    <!-- Right Side: Tic Tac Toe Game Container ONLY -->
+    <div id="dopamine-hit-section"></div>
   </div>
 
-  <!-- Right Side: Tic Tac Toe Game Container -->
-  <div id="dopamine-hit-section"></div>
+  <!-- Bottom: Centered Full-Width Game Metrics Bar (Spans Across Both Columns) -->
+  <div id="game-metrics-container" class="game-metrics-bar"></div>
 </main>
 
 <nav aria-label="Links">

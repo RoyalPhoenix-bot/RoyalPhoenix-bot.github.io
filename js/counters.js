@@ -1,5 +1,5 @@
 /**
- * js/counters.js — Powered by CounterAPI v2 (No-Cache Enabled)
+ * js/counters.js — Powered by CounterAPI v2 (Cloudflare Cache-Buster Enabled)
  */
 
 const NAMESPACE = "kushu"; 
@@ -25,13 +25,14 @@ function parseCount(payload) {
 }
 
 /**
- * Fetches view and like counts for a post without incrementing (Bypasses Disk Cache)
+ * Fetches view and like counts for a post without incrementing (Bypasses Edge & Disk Cache)
  */
 async function getMetrics(slug) {
   try {
+    const ts = Date.now();
     const [viewsRes, likesRes] = await Promise.all([
-      fetch(`${BASE_URL}/${slug}_views`, { headers: FETCH_HEADERS, cache: "no-store" }).catch(() => null),
-      fetch(`${BASE_URL}/${slug}_likes`, { headers: FETCH_HEADERS, cache: "no-store" }).catch(() => null)
+      fetch(`${BASE_URL}/${slug}_views?ts=${ts}`, { headers: FETCH_HEADERS, cache: "no-store" }).catch(() => null),
+      fetch(`${BASE_URL}/${slug}_likes?ts=${ts}`, { headers: FETCH_HEADERS, cache: "no-store" }).catch(() => null)
     ]);
 
     const viewsData = viewsRes && viewsRes.ok ? await viewsRes.json() : null;
@@ -51,7 +52,7 @@ async function getMetrics(slug) {
  */
 async function recordView(slug) {
   try {
-    const res = await fetch(`${BASE_URL}/${slug}_views/up`, { 
+    const res = await fetch(`${BASE_URL}/${slug}_views/up?ts=${Date.now()}`, { 
       headers: FETCH_HEADERS,
       cache: "no-store"
     });
@@ -76,7 +77,7 @@ async function recordLike(slug) {
   }
 
   try {
-    const res = await fetch(`${BASE_URL}/${slug}_likes/up`, { 
+    const res = await fetch(`${BASE_URL}/${slug}_likes/up?ts=${Date.now()}`, { 
       headers: FETCH_HEADERS,
       cache: "no-store"
     });
