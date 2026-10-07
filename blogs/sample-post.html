@@ -120,13 +120,9 @@
       likeBtn.classList.add("liked");
     }
 
-    // 3. Toggle like click event
-    likeBtn.addEventListener("click", async () => {
-      const res = await recordLike(slug);
-      if (res) {
-        likeCountSpan.textContent = res.likes;
-        likeBtn.classList.toggle("liked", res.liked);
-      }
+    // 3. Handle Like Button Clicks
+    likeBtn.addEventListener("click", () => {
+      recordLike(slug);
     });
   });
 </script>

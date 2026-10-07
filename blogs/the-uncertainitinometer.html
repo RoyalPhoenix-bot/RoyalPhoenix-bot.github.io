@@ -185,19 +185,8 @@
     }
 
     // 3. Handle Like Button Clicks
-    likeBtn.addEventListener("click", async () => {
-      likeBtn.disabled = true;
-      const res = await recordLike(slug);
-      likeBtn.disabled = false;
-
-      if (res && res.likes !== undefined) {
-        likeCountSpan.textContent = res.likes;
-        if (res.liked) {
-          likeBtn.classList.add("liked");
-        } else {
-          likeBtn.classList.remove("liked");
-        }
-      }
+    likeBtn.addEventListener("click", () => {
+      recordLike(slug);
     });
   });
 </script>

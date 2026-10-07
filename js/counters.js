@@ -65,7 +65,7 @@ async function recordView(slug) {
 }
 
 /**
- * Increments like count
+ * Increments like count with instant optimistic UI increment & vertical roller animation
  */
 async function recordLike(slug) {
   const hasLiked = localStorage.getItem(`has_liked_${slug}`) === "true";
@@ -76,21 +76,56 @@ async function recordLike(slug) {
     return { likes: current.likes, liked: true };
   }
 
+  // --- OPTIMISTIC UI UPDATE ---
+  const likeBtn = document.getElementById("like-btn") || document.querySelector(".like-button");
+  const likeCountEl = document.getElementById("like-count") || document.querySelector(".like-val") || document.querySelector(".like-count");
+
+  let optimisticCount = 0;
+
+  if (likeBtn) {
+    likeBtn.classList.add("liked");
+  }
+
+  if (likeCountEl) {
+    const currentCount = parseInt(likeCountEl.textContent, 10) || 0;
+    optimisticCount = currentCount + 1;
+
+    // Restart vertical roller animation
+    likeCountEl.classList.remove("like-roller-animating");
+    void likeCountEl.offsetWidth; // Reflow trick
+    likeCountEl.classList.add("like-roller-animating");
+
+    // Swap text mid-animation while the number is off-screen
+    setTimeout(() => {
+      likeCountEl.textContent = optimisticCount;
+    }, 160);
+  }
+
   try {
     const res = await fetch(`${BASE_URL}/${slug}_likes/up?ts=${Date.now()}`, { 
       headers: FETCH_HEADERS,
       cache: "no-store"
     });
-    if (!res.ok) return null;
+    
+    // Mark as liked in local storage
+    localStorage.setItem(`has_liked_${slug}`, "true");
+
+    if (!res.ok) return { likes: optimisticCount, liked: true };
 
     const data = await res.json();
     const newCount = parseCount(data);
 
-    localStorage.setItem(`has_liked_${slug}`, "true");
+    // Only overwrite DOM if the server count is strictly higher than optimistic count
+    if (likeCountEl && newCount > optimisticCount) {
+      likeCountEl.textContent = newCount;
+      return { likes: newCount, liked: true };
+    }
 
-    return { likes: newCount, liked: true };
+    return { likes: optimisticCount, liked: true };
   } catch (err) {
-    return null;
+    console.error("Failed to update backend like count:", err);
+    localStorage.setItem(`has_liked_${slug}`, "true");
+    return { likes: optimisticCount, liked: true };
   }
 }
 

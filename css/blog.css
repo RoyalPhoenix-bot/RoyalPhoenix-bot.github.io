@@ -393,3 +393,38 @@ body.light-mode .filter-btn.active {
   fill: currentColor;
   opacity: 1;
 }
+
+/* --- Vertical Roller Animation --- */
+#like-count,
+.like-val,
+.like-count {
+  display: inline-block;
+  position: relative;
+  overflow: hidden;
+  vertical-align: bottom;
+  height: 1.2em;
+  line-height: 1.2em;
+}
+
+.like-roller-animating {
+  animation: rollUp 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+@keyframes rollUp {
+  0% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+  40% {
+    transform: translateY(-100%);
+    opacity: 0;
+  }
+  41% {
+    transform: translateY(100%);
+    opacity: 0;
+  }
+  100% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
