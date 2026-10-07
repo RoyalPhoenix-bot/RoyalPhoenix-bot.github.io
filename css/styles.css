@@ -1,12 +1,15 @@
-/*
-  css/styles.css — Shared base styles, loaded on every page.
-*/
+/* Playfair Display (Headings) + Georgia (Body) */
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;0,700;1,600;1,700&display=swap');
+
 html {
   scroll-behavior: smooth;
 }
 
-/* Default Dark Theme Tokens */
+/* Default Dark Theme Tokens & Central Font Variables */
 :root {
+  --font-heading: "Playfair Display", serif;
+  --font-body: Georgia, "Times New Roman", serif;
+
   --bg: #0b0b0d;
   --text: #f3f1ec;
   --muted: #9c9aa1;
@@ -38,7 +41,7 @@ body {
   margin: 0;
   background: var(--bg);
   color: var(--text);
-  font-family: "Outfit", sans-serif;
+  font-family: var(--font-body);
   font-weight: 300;
   overflow-x: hidden;
   position: relative;
@@ -157,7 +160,7 @@ main {
 
 .intro h1 {
   margin: 0;
-  font-family: "Italiana", serif;
+  font-family: var(--font-heading);
   font-weight: 400;
   font-size: clamp(2.4rem, 5vw, 3.4rem);
   line-height: 1.05;
@@ -171,7 +174,7 @@ main {
 }
 
 .about .greeting {
-  font-family: "Italiana", serif;
+  font-family: var(--font-heading);
   font-size: 1.4rem;
   color: var(--text);
   margin: 0 0 1.5rem;
@@ -288,7 +291,7 @@ p a:hover {
 }
 
 .game-header h2 {
-  font-family: "Italiana", serif;
+  font-family: var(--font-heading);
   margin-top: 0;
   margin-bottom: 0.5rem;
   color: var(--text);
@@ -314,7 +317,7 @@ p a:hover {
   background: var(--bg);
   border: 1px solid #ffd700 !important;
   color: #ffd700;
-  font-family: "Italiana", serif;
+  font-family: var(--font-heading);
   font-size: 2.2rem;
   font-weight: bold;
   cursor: pointer;
@@ -417,7 +420,7 @@ body.light-mode .ttt-cell.winning-cell {
   right: 0;
   background: rgba(255, 0, 0, 0.85);
   color: #fff;
-  font-family: "Outfit", sans-serif;
+  font-family: var(--font-body);
   font-weight: 500;
   font-size: clamp(1.1rem, 3vw, 1.8rem);
   text-align: center;
@@ -491,7 +494,7 @@ body.light-mode .ttt-cell.winning-cell {
 }
 
 .nuke-status-text {
-  font-family: "Italiana", serif;
+  font-family: var(--font-heading);
   font-size: 1.5rem;
   color: #f3f1ec !important;
   line-height: 1.5;
@@ -590,7 +593,7 @@ body.light-mode .ttt-cell.winning-cell {
 }
 
 .chess-badge-header h2 {
-  font-family: "Italiana", serif;
+  font-family: var(--font-heading);
   font-size: 1.25rem;
   margin: 0;
   color: var(--text);
@@ -648,7 +651,7 @@ body.light-mode .ttt-cell.winning-cell {
 }
 
 .stat-val {
-  font-family: "Italiana", serif;
+  font-family: var(--font-heading);
   font-size: 1.5rem;
   color: var(--text);
 }
@@ -678,7 +681,7 @@ body.light-mode .ttt-cell.winning-cell {
 }
 
 .duolingo-badge-header h2 {
-  font-family: "Italiana", serif;
+  font-family: var(--font-heading);
   font-size: 1.15rem;
   margin: 0;
   color: var(--text);
@@ -694,7 +697,7 @@ body.light-mode .ttt-cell.winning-cell {
 }
 
 .duolingo-stat .stat-val {
-  font-family: "Italiana", serif;
+  font-family: var(--font-heading);
   font-size: 1.8rem;
   color: var(--accent);
 }
